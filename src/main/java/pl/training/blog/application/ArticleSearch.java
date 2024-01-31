@@ -19,12 +19,12 @@ public class ArticleSearch {
                 .orElseThrow(ArticleNotFoundException::new);
     }
 
-    public ResultPage<ArticleView> findByCategory(ArticleCategory category) {
-        return articleRepository.findByCategory(category);
+    public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
+        return articleRepository.findByCategory(category, pageDefinition);
     }
 
-    public ResultPage<ArticleView> findByTags(Set<Tag> tags) {
-        return articleRepository.findByTags(tags);
+    public ResultPage<ArticleView> findByTags(Set<Tag> tags, PageDefinition pageDefinition) {
+        return articleRepository.findByTags(tags, pageDefinition);
     }
 
 }

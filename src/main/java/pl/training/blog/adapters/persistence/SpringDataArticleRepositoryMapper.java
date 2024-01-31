@@ -14,7 +14,7 @@ public interface SpringDataArticleRepositoryMapper {
 
     Article toDomain(ArticleEntity articleEntity);
 
-    @Mapping(source = "content", target = "data")
+    @Mapping(source = "content", target = "elements")
     @Mapping(source = "number", target = "pageNumber")
     ResultPage<ArticleView> toDomain(Page<ArticleView> articleViews);
 
