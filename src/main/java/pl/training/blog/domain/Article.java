@@ -3,7 +3,6 @@ package pl.training.blog.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -23,17 +22,13 @@ public class Article {
 
     @Builder.Default
     private UUID id = UUID.randomUUID();
-    @Setter
     private String title;
     private List<String> authors;
-    @Setter
     private String content;
-    @Setter
     private ArticleCategory category;
     @Builder.Default
     private ArticleStatus status = DRAFT;
     @Builder.Default
-    @Setter
     private Set<Tag> tags = emptySet();
     @Builder.Default
     private Instant created = Instant.now();
@@ -56,8 +51,25 @@ public class Article {
     }
 
     public void publish() {
-        status = PUBLISHED;
-        published = Instant.now();
+        if (status != PUBLISHED) {
+            status = PUBLISHED;
+            published = Instant.now();
+        }
+    }
+
+    public void patch(ArticleUpdate articleUpdate) {
+        var title = articleUpdate.getTitle();
+        if (title != null) {
+            this.title = title;
+        }
+        var content = articleUpdate.getContent();
+        if (content != null) {
+            this.content = content;
+        }
+        var tags = articleUpdate.getTags();
+        if (tags != null && !tags.isEmpty()) {
+            this.tags = tags;
+        }
     }
 
 }

@@ -8,3 +8,28 @@ Content-Type: application/json
   "category": "IT",
   "content": "..."
 }
+
+###
+
+DELETE http://localhost:8080/articles/79ccc0aa-cc2e-4d1b-9f9f-798369d08bb0
+Accept: application/json
+Content-Type: application/json
+
+###
+
+PATCH http://localhost:8080/articles/34c17ae6-da1c-49d8-a059-cd05b34be21b
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "Podstawy Spring",
+  "category": "IT",
+  "content": "...",
+  "tags": ["it", "java"]
+}
+
+###
+
+PUT http://localhost:8080/articles/published/57e49a3f-4ba6-4674-8ef7-142d418716f5
+Accept: application/json
+Content-Type: application/js

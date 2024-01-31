@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.ALL;
-import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.CascadeType.*;
 
 @Table(name = "Articles", indexes = @Index(name = "article_category", columnList = "category"))
 @Entity(name = "Article")
@@ -34,7 +33,7 @@ public class ArticleEntity {
     private String content;
     private String category;
     private String status;
-    @ManyToMany(cascade = PERSIST)
+    @ManyToMany(cascade = {PERSIST, MERGE})
     private Set<TagEntity> tags;
     private Instant created;
     private Instant published;

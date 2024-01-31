@@ -2,11 +2,9 @@ package pl.training.blog.application;
 
 import lombok.RequiredArgsConstructor;
 import pl.training.blog.domain.Article;
-import pl.training.blog.domain.ArticleCategory;
-import pl.training.blog.domain.Tag;
+import pl.training.blog.domain.ArticleUpdate;
 import pl.training.blog.ports.ArticleRepository;
 
-import java.util.Set;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -24,28 +22,16 @@ public class ArticleAuthorActions {
         return articleRepository.save(article).getId();
     }
 
-    public void delete(UUID articleUid) {
-        articleRepository.deleteById(articleUid);
+    public void delete(UUID articleId) {
+        articleRepository.deleteById(articleId);
     }
 
-    public void updateTitle(UUID articleUid, String newTitle) {
-        articleRepository.apply(articleUid, article -> article.setTitle(newTitle));
+    public void update(UUID articleId, ArticleUpdate articleUpdate) {
+        articleRepository.apply(articleId, article -> article.patch(articleUpdate));
     }
 
-    public void updateContent(UUID articleUid, String newContent) {
-        articleRepository.apply(articleUid, article -> article.setContent(newContent));
-    }
-
-    public void updateCategory(UUID articleUid, ArticleCategory newCategory) {
-        articleRepository.apply(articleUid, article -> article.setCategory(newCategory));
-    }
-
-    public void setTags(UUID articleUid, Set<Tag> tags) {
-        articleRepository.apply(articleUid, article -> article.setTags(tags));
-    }
-
-    public void publish(UUID articleUid) {
-        articleRepository.apply(articleUid, Article::publish);
+    public void publish(UUID articleId) {
+        articleRepository.apply(articleId, Article::publish);
     }
 
 }
