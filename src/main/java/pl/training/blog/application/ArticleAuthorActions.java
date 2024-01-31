@@ -15,7 +15,7 @@ public class ArticleAuthorActions {
     public UUID create(ArticleTemplate articleTemplate) {
         var article = Article.builder()
                 .title(articleTemplate.getTitle())
-                .authors(articleTemplate.getAuthors())
+                .author(articleTemplate.getAuthor())
                 .content(articleTemplate.getContent())
                 .category(articleTemplate.getCategory())
                 .build();

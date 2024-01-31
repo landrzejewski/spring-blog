@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ArticleAuthorActionsRestController {
 
     private final ArticleAuthorActions articleAuthorActions;
-    private final ArticleAuthorActionsMapper articleMapper;
+    private final ArticleRestMapper articleMapper;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody ArticleTemplateDto articleTemplateDto) {

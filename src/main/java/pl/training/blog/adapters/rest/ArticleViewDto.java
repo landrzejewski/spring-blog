@@ -1,13 +1,11 @@
-package pl.training.blog.application;
+package pl.training.blog.adapters.rest;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.UUID;
 
-@AllArgsConstructor
 @Data
-public class ArticleView {
+public class ArticleViewDto {
 
     private UUID id;
     private String title;

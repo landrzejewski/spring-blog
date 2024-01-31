@@ -1,7 +1,6 @@
 package pl.training.blog.adapters.persistence;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,10 +23,7 @@ public class ArticleEntity {
     private UUID id;
     @Column(nullable = false, length = 200)
     private String title;
-    @ElementCollection
-    @CollectionTable(name = "authors", joinColumns = @JoinColumn(name = "article_id"))
-    @Column(name = "author")
-    private List<String> authors;
+    private String author;
     @Lob
     @Column(length = 1024)
     private String content;

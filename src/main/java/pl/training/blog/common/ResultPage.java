@@ -1,4 +1,4 @@
-package pl.training.blog.application;
+package pl.training.blog.common;
 
 import lombok.Data;
 

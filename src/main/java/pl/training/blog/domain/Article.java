@@ -23,7 +23,7 @@ public class Article {
     @Builder.Default
     private UUID id = UUID.randomUUID();
     private String title;
-    private List<String> authors;
+    private String author;
     private String content;
     private ArticleCategory category;
     @Builder.Default

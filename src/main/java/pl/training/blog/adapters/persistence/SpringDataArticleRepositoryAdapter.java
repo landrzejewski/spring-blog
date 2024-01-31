@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import pl.training.blog.application.ArticleView;
-import pl.training.blog.application.PageDefinition;
-import pl.training.blog.application.ResultPage;
+import pl.training.blog.common.PageDefinition;
+import pl.training.blog.common.ResultPage;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
@@ -42,6 +42,14 @@ public class SpringDataArticleRepositoryAdapter implements ArticleRepository {
         var page = PageRequest.of(pageDefinition.pageNumber(), pageDefinition.pageSize());
         var tagNames = tags.stream().map(Tag::getName).collect(toSet());
         var resultPage = articleRepository.findByTags(tagNames, tagNames.size(), page);
+        return articleMapper.toDomain(resultPage);
+    }
+
+    @Override
+    public ResultPage<ArticleView> findByCategoryAndTags(ArticleCategory category, Set<Tag> tags, PageDefinition pageDefinition) {
+        var page = PageRequest.of(pageDefinition.pageNumber(), pageDefinition.pageSize());
+        var tagNames = tags.stream().map(Tag::getName).collect(toSet());
+        var resultPage = articleRepository.findByCategoryAndTags(category.name(), tagNames, tagNames.size(), page);
         return articleMapper.toDomain(resultPage);
     }
 

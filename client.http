@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "title": "Podstawy Spring",
-  "authors": ["Jan Kowalski"],
+  "author": "Jan Kowalski",
   "category": "IT",
   "content": "..."
 }
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:8080/articles/34c17ae6-da1c-49d8-a059-cd05b34be21b
+PATCH http://localhost:8080/articles/482e2c03-7f3d-4b76-aeb9-14d9e66156a5
 Accept: application/json
 Content-Type: application/json
 
@@ -31,5 +31,17 @@ Content-Type: application/json
 ###
 
 PUT http://localhost:8080/articles/published/57e49a3f-4ba6-4674-8ef7-142d418716f5
+Accept: application/json
+Content-Type: application/js
+
+###
+
+GET http://localhost:8080/articles/328bd1e8-0f4e-4edb-aff9-e7242e5eaf14
+Accept: application/json
+Content-Type: application/js
+
+###
+
+GET http://localhost:8080/categories/IT/articles?tag=it&tag=java
 Accept: application/json
 Content-Type: application/js

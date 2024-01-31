@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 import pl.training.blog.application.ArticleView;
-import pl.training.blog.application.ResultPage;
+import pl.training.blog.common.ResultPage;
 import pl.training.blog.domain.Article;
 
 @Mapper(componentModel = "spring")
