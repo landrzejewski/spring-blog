@@ -15,6 +15,6 @@ public interface SpringDataArticleRepository extends JpaRepository<ArticleEntity
     Page<ArticleView> findByCategory(String category, Pageable pageable);
 
     @Query("select new pl.training.blog.application.ArticleView(a.id, a.title, a.authors) from Article a join a.tags at where at.name in :tags group by a having count (a) = :count")
-    Page<ArticleView> findByTags(Set<String> tags);
+    Page<ArticleView> findByTags(Set<String> tags, int count, Pageable pageable);
 
 }
