@@ -16,12 +16,12 @@ import static lombok.AccessLevel.PRIVATE;
 import static pl.training.blog.domain.ArticleStatus.DRAFT;
 import static pl.training.blog.domain.ArticleStatus.PUBLISHED;
 
+@Getter
 @Builder
 @AllArgsConstructor(access = PRIVATE)
 public class Article {
 
     @Builder.Default
-    @Getter
     private UUID id = UUID.randomUUID();
     @Setter
     private String title;
