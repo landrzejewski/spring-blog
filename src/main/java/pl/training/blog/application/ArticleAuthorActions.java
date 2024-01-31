@@ -25,7 +25,7 @@ public class ArticleAuthorActions {
     }
 
     public void delete(UUID articleUid) {
-        articleRepository.deleteByUid(articleUid);
+        articleRepository.deleteById(articleUid);
     }
 
     public void updateTitle(UUID articleUid, String newTitle) {

@@ -22,7 +22,7 @@ public interface ArticleRepository {
 
     Article save(Article article);
 
-    void deleteByUid(UUID articleId);
+    void deleteById(UUID articleId);
 
     default void apply(UUID articleId, Consumer<Article> operation) {
         var article = findById(articleId)

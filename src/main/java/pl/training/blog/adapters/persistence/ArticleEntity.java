@@ -1,0 +1,40 @@
+package pl.training.blog.adapters.persistence;
+
+import jakarta.persistence.*;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.PERSIST;
+
+@Table(name = "Articles", indexes = @Index(name = "article_category", columnList = "category"))
+@Entity(name = "Article")
+public class ArticleEntity {
+
+    @Id
+    private UUID id;
+    @Column(nullable = false, length = 200)
+    private String title;
+    @ElementCollection
+    @CollectionTable(name = "authors", joinColumns = @JoinColumn(name = "article_id"))
+    @Column(name = "author")
+    private List<String> authors;
+    @Lob
+    @Column(length = 1024)
+    private String content;
+    private String category;
+    private String status;
+    @ManyToMany(cascade = PERSIST)
+    private Set<TagEntity> tags;
+    private Instant created;
+    private Instant published;
+    private int likes;
+    private int dislikes;
+    @JoinColumn(name = "article_id")
+    @OneToMany(cascade = ALL)
+    private List<CommentEntity> comments;
+
+}
