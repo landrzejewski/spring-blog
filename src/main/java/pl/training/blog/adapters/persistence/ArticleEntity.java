@@ -1,6 +1,10 @@
 package pl.training.blog.adapters.persistence;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 import java.util.List;
@@ -12,6 +16,9 @@ import static jakarta.persistence.CascadeType.PERSIST;
 
 @Table(name = "Articles", indexes = @Index(name = "article_category", columnList = "category"))
 @Entity(name = "Article")
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 public class ArticleEntity {
 
     @Id

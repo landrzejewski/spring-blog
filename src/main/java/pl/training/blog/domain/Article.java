@@ -1,5 +1,6 @@
 package pl.training.blog.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +12,12 @@ import java.util.Set;
 import java.util.UUID;
 
 import static java.util.Collections.emptySet;
+import static lombok.AccessLevel.PRIVATE;
 import static pl.training.blog.domain.ArticleStatus.DRAFT;
 import static pl.training.blog.domain.ArticleStatus.PUBLISHED;
 
 @Builder
+@AllArgsConstructor(access = PRIVATE)
 public class Article {
 
     @Builder.Default
