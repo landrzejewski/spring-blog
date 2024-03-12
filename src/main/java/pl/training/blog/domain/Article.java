@@ -3,6 +3,7 @@ package pl.training.blog.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import static pl.training.blog.domain.ArticleStatus.PUBLISHED;
 @Getter
 @Builder
 @AllArgsConstructor(access = PRIVATE)
+@ToString
 public class Article {
 
     @Builder.Default
