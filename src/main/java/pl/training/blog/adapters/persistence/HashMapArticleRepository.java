@@ -1,5 +1,6 @@
 package pl.training.blog.adapters.persistence;
 
+import org.springframework.stereotype.Repository;
 import pl.training.blog.application.ArticleView;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
@@ -10,6 +11,7 @@ import pl.training.blog.ports.ArticleRepository;
 
 import java.util.*;
 
+@Repository
 public class HashMapArticleRepository implements ArticleRepository {
 
     private final Map<UUID, Article> articleMap;
