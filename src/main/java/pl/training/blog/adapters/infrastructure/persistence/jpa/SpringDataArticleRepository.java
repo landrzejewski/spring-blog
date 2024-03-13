@@ -1,4 +1,4 @@
-package pl.training.blog.adapters.persistence.jpa;
+package pl.training.blog.adapters.infrastructure.persistence.jpa;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

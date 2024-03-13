@@ -1,4 +1,4 @@
-package pl.training.blog.adapters.persistence;
+package pl.training.blog.adapters.infrastructure.persistence;
 
 import org.springframework.stereotype.Repository;
 import pl.training.blog.application.ArticleView;
@@ -7,7 +7,7 @@ import pl.training.blog.common.ResultPage;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
-import pl.training.blog.ports.ArticleRepository;
+import pl.training.blog.ports.infrastructure.ArticleRepository;
 
 import java.util.*;
 

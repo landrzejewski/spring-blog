@@ -3,25 +3,28 @@ package pl.training.blog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.training.blog.application.ArticleAuthorActions;
+import pl.training.blog.ports.api.ArticleSearchApi;
+import pl.training.blog.ports.api.ArticleReaderActionsApi;
+import pl.training.blog.ports.api.ArticleAuthorActionsApi;
 import pl.training.blog.application.ArticleReaderActions;
 import pl.training.blog.application.ArticleSearch;
-import pl.training.blog.ports.ArticleRepository;
+import pl.training.blog.ports.infrastructure.ArticleRepository;
 
 @Configuration
 public class BlogConfiguration {
 
     @Bean
-    public ArticleAuthorActions articleAuthorActions(ArticleRepository articleRepository) {
+    public ArticleAuthorActionsApi articleAuthorActions(ArticleRepository articleRepository) {
         return new ArticleAuthorActions(articleRepository);
     }
 
     @Bean
-    public ArticleReaderActions articleReaderActions(ArticleRepository articleRepository) {
+    public ArticleReaderActionsApi articleReaderActions(ArticleRepository articleRepository) {
         return new ArticleReaderActions(articleRepository);
     }
 
     @Bean
-    public ArticleSearch articleSearch(ArticleRepository articleRepository) {
+    public ArticleSearchApi articleSearch(ArticleRepository articleRepository) {
         return new ArticleSearch(articleRepository);
     }
 
