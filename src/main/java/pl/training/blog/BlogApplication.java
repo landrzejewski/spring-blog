@@ -17,6 +17,7 @@ public class BlogApplication {
             // var readerActions = context.getBean(ArticleReaderActionsApi.class);
             var search = context.getBean(ArticleSearchApi.class);
             System.out.println(search.findByUid(id));
+            System.out.println(search.findByUid(id));
         }
     }
 
