@@ -1,19 +1,17 @@
 package pl.training.blog.application;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
-import pl.training.blog.ports.infrastructure.ArticleRepository;
 import pl.training.blog.ports.api.ArticleSearchApi;
+import pl.training.blog.ports.infrastructure.ArticleRepository;
 
 import java.util.Set;
 import java.util.UUID;
 
-@Service
 @RequiredArgsConstructor
 public class ArticleSearch implements ArticleSearchApi {
 
