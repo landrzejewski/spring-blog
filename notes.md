@@ -1,2 +1,0 @@
-- Dopisz adapter REST tak, żeby umożliwić wykonanie operacji z metody run (Application) przez http/rest api
-- Uwzględnij obsługę wyjątków i walidację
