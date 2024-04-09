@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Transactional
-@Repository
+//@Repository
 @RequiredArgsConstructor
 public class SpringDataArticleRepositoryAdapter implements ArticleRepository {
 

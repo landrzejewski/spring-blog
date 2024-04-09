@@ -4,6 +4,12 @@ spring:
     password: admin
     url: jdbc:h2:file:./data/blog.db;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
+  data:
+    mongodb:
+      username: admin
+      password: admin
+      database: articles
+      authentication-database: admin
   jpa:
     generate-ddl: true
   h2:

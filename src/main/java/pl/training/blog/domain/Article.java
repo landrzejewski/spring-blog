@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,12 +18,14 @@ import static lombok.AccessLevel.PRIVATE;
 import static pl.training.blog.domain.ArticleStatus.DRAFT;
 import static pl.training.blog.domain.ArticleStatus.PUBLISHED;
 
+@Document
 @Getter
 @Builder
 @AllArgsConstructor(access = PRIVATE)
 @ToString
 public class Article {
 
+    @Id
     @Builder.Default
     private UUID id = UUID.randomUUID();
     private String title;
