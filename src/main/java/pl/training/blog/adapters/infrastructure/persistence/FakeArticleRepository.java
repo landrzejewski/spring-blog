@@ -1,6 +1,5 @@
 package pl.training.blog.adapters.infrastructure.persistence;
 
-import org.springframework.stereotype.Component;
 import pl.training.blog.application.ArticleView;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
@@ -13,7 +12,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-@Component
 public class FakeArticleRepository implements ArticleRepository {
 
     @Override

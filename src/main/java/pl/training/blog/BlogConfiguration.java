@@ -1,13 +1,10 @@
 package pl.training.blog;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import pl.training.blog.adapters.infrastructure.events.SpringArticleEventsListener;
 import pl.training.blog.adapters.infrastructure.events.SpringEventsEmitter;
-import pl.training.blog.adapters.infrastructure.persistence.HashMapArticleRepository;
 import pl.training.blog.application.ArticleAuthorActions;
 import pl.training.blog.application.ArticleReaderActions;
 import pl.training.blog.application.ArticleSearch;
@@ -21,14 +18,8 @@ import pl.training.blog.ports.infrastructure.EventsEmitter;
 @Configuration
 public class BlogConfiguration {
 
-    @Primary
     @Bean
-    public ArticleRepository articleRepository() {
-        return new HashMapArticleRepository();
-    }
-
-    @Bean
-    public ArticleAuthorActionsApi articleAuthorActions(@Qualifier("articleRepository") ArticleRepository articleRepository) {
+    public ArticleAuthorActionsApi articleAuthorActions(ArticleRepository articleRepository) {
         return new ArticleAuthorActions(articleRepository);
     }
 
