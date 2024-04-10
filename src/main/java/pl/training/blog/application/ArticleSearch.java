@@ -25,7 +25,7 @@ public class ArticleSearch implements ArticleSearchApi {
                 .orElseThrow(ArticleNotFoundException::new);
     }
 
-    @FromCache
+    //@FromCache
     @Override
     public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
         return articleRepository.findByCategory(category, pageDefinition);

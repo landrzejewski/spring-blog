@@ -12,13 +12,13 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 ###
 
-DELETE http://localhost:8080/articles/5bd208bb-e53f-4326-a987-3a71a5df1cba
+DELETE http://localhost:8080/articles/d683e3a7-0ff5-495c-bb6c-d6a180ddd146
 Accept: application/json
 Content-Type: application/json
 
 ###
 
-PATCH http://localhost:8080/articles/88bcc10c-c001-45f8-8c63-b09b7c5d64de
+PATCH http://localhost:8080/articles/9c332296-d162-41cc-9156-be0b6fa8b68b
 Accept: application/json
 Content-Type: application/json
 
@@ -31,13 +31,13 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/articles/published/88bcc10c-c001-45f8-8c63-b09b7c5d64de
+PUT http://localhost:8080/articles/published/09971197-a447-4795-8547-725c587e1c7e
 Accept: application/json
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/articles/88bcc10c-c001-45f8-8c63-b09b7c5d64de
+GET http://localhost:8080/articles/09971197-a447-4795-8547-725c587e1c7e
 Accept: application/json
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
