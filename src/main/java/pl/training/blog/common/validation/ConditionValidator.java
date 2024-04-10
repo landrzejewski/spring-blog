@@ -3,33 +3,24 @@ package pl.training.blog.common.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
+import java.util.Map;
 import java.util.function.Predicate;
 
 @RequiredArgsConstructor
-public class ConditionValidator implements ConstraintValidator<Condition, String>, ApplicationContextAware {
+public class ConditionValidator implements ConstraintValidator<Condition, String> {
 
     private Predicate<String> predicate;
-    private ApplicationContext applicationContext;
+    private final Map<String, Predicate<String>> predicates;
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initialize(Condition constraintAnnotation) {
-        var predicateBeanName = constraintAnnotation.value();
-        predicate = (Predicate<String>) applicationContext.getBean(predicateBeanName);
+        predicate = predicates.get(constraintAnnotation.value());
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return !predicate.test(value);
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        return predicate.test(value);
     }
 
 }

@@ -9,11 +9,15 @@ import pl.training.blog.application.ArticleAuthorActions;
 import pl.training.blog.application.ArticleReaderActions;
 import pl.training.blog.application.ArticleSearch;
 import pl.training.blog.common.cache.CacheAspect;
+import pl.training.blog.common.validation.ConditionValidator;
+import pl.training.blog.common.validation.UniqueTitlePredicate;
 import pl.training.blog.ports.api.ArticleAuthorActionsApi;
 import pl.training.blog.ports.api.ArticleReaderActionsApi;
 import pl.training.blog.ports.api.ArticleSearchApi;
 import pl.training.blog.ports.infrastructure.ArticleRepository;
 import pl.training.blog.ports.infrastructure.EventsEmitter;
+
+import java.util.function.Predicate;
 
 @Configuration
 public class BlogConfiguration {
@@ -46,6 +50,16 @@ public class BlogConfiguration {
     @Bean
     public SpringArticleEventsListener eventsListener() {
         return new SpringArticleEventsListener();
+    }
+
+    @Bean
+    public Predicate<String> uniqueTitle(ArticleRepository articleRepository) {
+        return new UniqueTitlePredicate(articleRepository);
+    }
+
+    @Bean
+    public Predicate<String> uniqueAuthor() {
+        return string -> false;
     }
 
 }

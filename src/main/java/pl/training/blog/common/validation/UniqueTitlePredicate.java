@@ -1,12 +1,10 @@
 package pl.training.blog.common.validation;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import pl.training.blog.ports.infrastructure.ArticleRepository;
 
 import java.util.function.Predicate;
 
-@Component("uniqueTitle")
 @RequiredArgsConstructor
 public class UniqueTitlePredicate implements Predicate<String> {
 
@@ -14,7 +12,7 @@ public class UniqueTitlePredicate implements Predicate<String> {
 
     @Override
     public boolean test(String title) {
-        return articleRepository.existsByTitle(title);
+        return !articleRepository.existsByTitle(title);
     }
 
 }
