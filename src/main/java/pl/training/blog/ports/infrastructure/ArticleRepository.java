@@ -34,4 +34,6 @@ public interface ArticleRepository {
         save(article);
     }
 
+    boolean existsByTitle(String title);
+
 }

@@ -68,4 +68,9 @@ public class SpringDataArticleRepositoryAdapter implements ArticleRepository {
         return articleMapper.toDomain(result);
     }
 
+    @Override
+    public boolean existsByTitle(String title) {
+        return articleRepository.existsByTitle(title);
+    }
+
 }

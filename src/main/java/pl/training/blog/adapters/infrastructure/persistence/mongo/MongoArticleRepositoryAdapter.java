@@ -49,4 +49,10 @@ public class MongoArticleRepositoryAdapter implements ArticleRepository {
     public ResultPage<ArticleView> findByCategoryAndTags(ArticleCategory category, Set<Tag> tags, PageDefinition pageDefinition) {
         return null;
     }
+
+    @Override
+    public boolean existsByTitle(String title) {
+        return articleRepository.existsByTitle(title);
+    }
+
 }
