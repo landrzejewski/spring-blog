@@ -40,7 +40,7 @@ Content-Type: application/json
 GET http://localhost:8080/articles/09971197-a447-4795-8547-725c587e1c7e
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic YWRtaW46YWRtaW4=
+Authorization: Basic YWRtaW46MTIz
 
 ###
 
