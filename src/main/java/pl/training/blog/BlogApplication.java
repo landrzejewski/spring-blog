@@ -14,9 +14,9 @@ import static pl.training.blog.domain.ArticleCategory.IT;
 public class BlogApplication {
 
     public static void main(String[] args) {
-        try (var contex = new AnnotationConfigApplicationContext(BlogConfiguration.class)) {
-            var authorActions = contex.getBean(ArticleAuthorActionsApi.class);
-            var search = contex.getBean(ArticleSearchApi.class);
+        try (var context = new AnnotationConfigApplicationContext(BlogConfiguration.class)) {
+            var authorActions = context.getBean(ArticleAuthorActionsApi.class);
+            var search = context.getBean(ArticleSearchApi.class);
 
             var article = new ArticleTemplate("Test", "Jan Kowalski", "",  IT);
             var id = authorActions.create(article);
