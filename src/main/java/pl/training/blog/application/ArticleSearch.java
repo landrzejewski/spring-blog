@@ -3,7 +3,6 @@ package pl.training.blog.application;
 import lombok.RequiredArgsConstructor;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
-import pl.training.blog.common.cache.FromCache;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
@@ -18,7 +17,6 @@ public class ArticleSearch implements ArticleSearchApi {
 
     private final ArticleRepository articleRepository;
 
-    @FromCache
     @Override
     public Article findByUid(UUID id) {
         return articleRepository.findById(id)
