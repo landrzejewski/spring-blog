@@ -1,9 +1,7 @@
 package pl.training.blog;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import pl.training.blog.application.ArticleAuthorActions;
 import pl.training.blog.application.ArticleReaderActions;
 import pl.training.blog.application.ArticleSearch;
@@ -13,8 +11,6 @@ import pl.training.blog.ports.api.ArticleSearchApi;
 import pl.training.blog.ports.infrastructure.ArticleRepository;
 import pl.training.blog.ports.infrastructure.EventsEmitter;
 
-@EnableAspectJAutoProxy
-@ComponentScan
 @Configuration
 public class BlogConfiguration {
 

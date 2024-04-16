@@ -2,7 +2,10 @@ package pl.training.blog;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.training.blog.application.ArticleTemplate;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.ports.api.ArticleAuthorActionsApi;
@@ -10,22 +13,25 @@ import pl.training.blog.ports.api.ArticleSearchApi;
 
 import static pl.training.blog.domain.ArticleCategory.IT;
 
+@SpringBootApplication
 @RequiredArgsConstructor
 @Log
-public class BlogApplication {
+public class BlogApplication implements ApplicationRunner {
+
+    private final ArticleAuthorActionsApi authorActions;
+    private final ArticleSearchApi search;
 
     public static void main(String[] args) {
-        try (var context = new AnnotationConfigApplicationContext(BlogConfiguration.class)) {
-            var authorActions = context.getBean(ArticleAuthorActionsApi.class);
-            var search = context.getBean(ArticleSearchApi.class);
+        SpringApplication.run(BlogApplication.class, args);
+    }
 
-            var article = new ArticleTemplate("Test", "Jan Kowalski", "",  IT);
-            var id = authorActions.create(article);
-            log.info(search.findByUid(id).toString());
-            search.findByCategory(IT, new PageDefinition(0, 10));
-            search.findByCategory(IT, new PageDefinition(0, 10));
-        }
-
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        var article = new ArticleTemplate("Test", "Jan Kowalski", "",  IT);
+        var id = authorActions.create(article);
+        log.info(search.findByUid(id).toString());
+        search.findByCategory(IT, new PageDefinition(0, 10));
+        search.findByCategory(IT, new PageDefinition(0, 10));
     }
 
 }
