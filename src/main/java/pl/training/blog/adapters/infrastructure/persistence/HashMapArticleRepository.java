@@ -28,7 +28,7 @@ public class HashMapArticleRepository implements ArticleRepository {
     @Override
     public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
         // Implement logic to find articles by category
-        return null;
+        return new ResultPage<>();
     }
 
     @Override

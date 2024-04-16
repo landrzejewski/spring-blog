@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pl.training.blog.application.ArticleTemplate;
+import pl.training.blog.common.PageDefinition;
 import pl.training.blog.ports.api.ArticleAuthorActionsApi;
 import pl.training.blog.ports.api.ArticleSearchApi;
 
@@ -21,6 +22,8 @@ public class BlogApplication {
             var article = new ArticleTemplate("Test", "Jan Kowalski", "",  IT);
             var id = authorActions.create(article);
             log.info(search.findByUid(id).toString());
+            search.findByCategory(IT, new PageDefinition(0, 10));
+            search.findByCategory(IT, new PageDefinition(0, 10));
         }
 
     }
