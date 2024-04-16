@@ -16,6 +16,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
-      - MONGO_INITDB_ROOT_DATABASE=payments
+      - MONGO_INITDB_ROOT_DATABASE=articles
     volumes:
       - ./data/mongo:/data/mongo

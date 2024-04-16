@@ -6,3 +6,9 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     generate-ddl: true
+  data:
+    mongodb:
+      username: admin
+      password: admin
+      database: articles
+      authentication-database: admin

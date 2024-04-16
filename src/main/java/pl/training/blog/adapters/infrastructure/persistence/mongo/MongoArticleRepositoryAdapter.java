@@ -1,6 +1,7 @@
-package pl.training.blog.adapters.infrastructure.persistence.jpa;
+package pl.training.blog.adapters.infrastructure.persistence.mongo;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.training.blog.application.ArticleView;
@@ -15,13 +16,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+@Primary
 @Transactional
 @Repository
 @RequiredArgsConstructor
-public class SpringDataArticleRepositoryAdapter implements ArticleRepository {
+public class MongoArticleRepositoryAdapter implements ArticleRepository {
 
-    private final SpringDataArticleRepository articleRepository;
-    private final SpringDataArticleMapper articleMapper;
+    private final MongoArticleRepository articleRepository;
+    private final MongoDataArticleMapper articleMapper;
 
     @Override
     public Optional<Article> findById(UUID id) {
@@ -31,33 +33,23 @@ public class SpringDataArticleRepositoryAdapter implements ArticleRepository {
 
     @Override
     public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
-        var page = articleMapper.toEntity(pageDefinition);
-        var categoryName = articleMapper.toEntity(category);
-        var result = articleRepository.findByCategory(categoryName, page);
-        return articleMapper.toDomain(result);
+        return new ResultPage<>();
     }
 
     @Override
     public ResultPage<ArticleView> findByTags(Set<Tag> tags, PageDefinition pageDefinition) {
-        var page = articleMapper.toEntity(pageDefinition);
-        var tagNames = articleMapper.toEntity(tags);
-        var result = articleRepository.findByTags(tagNames, tagNames.size(), page);
-        return articleMapper.toDomain(result);
+        return new ResultPage<>();
     }
 
     @Override
     public ResultPage<ArticleView> findByCategoryAndTags(ArticleCategory category, Set<Tag> tags, PageDefinition pageDefinition) {
-        var page = articleMapper.toEntity(pageDefinition);
-        var categoryName = articleMapper.toEntity(category);
-        var tagNames = articleMapper.toEntity(tags);
-        var result = articleRepository.findByCategoryAndTags(categoryName, tagNames, tagNames.size(), page);
-        return articleMapper.toDomain(result);
+        return new ResultPage<>();
     }
 
     @Override
     public Article save(Article article) {
-        var articleEntity = articleMapper.toEntity(article);
-        var savedArticleEntity = articleRepository.save(articleEntity);
+        var articleDocument = articleMapper.toDocument(article);
+        var savedArticleEntity = articleRepository.save(articleDocument);
         return articleMapper.toDomain(savedArticleEntity);
     }
 
