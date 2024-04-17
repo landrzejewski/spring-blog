@@ -40,7 +40,7 @@ public class ArticleSearch implements ArticleSearchApi {
     public ResultPage<ArticleView> findByCategoryAndTags(ArticleCategory category, Set<Tag> tags, PageDefinition pageDefinition) {
         return tags.isEmpty()
                 ? findByCategory(category, pageDefinition)
-                : findByCategoryAndTags(category, tags, pageDefinition);
+                : articleRepository.findByCategoryAndTags(category, tags, pageDefinition);
     }
 
 }
