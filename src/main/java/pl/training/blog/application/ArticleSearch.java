@@ -38,7 +38,9 @@ public class ArticleSearch implements ArticleSearchApi {
 
     @Override
     public ResultPage<ArticleView> findByCategoryAndTags(ArticleCategory category, Set<Tag> tags, PageDefinition pageDefinition) {
-        return articleRepository.findByCategoryAndTags(category, tags, pageDefinition);
+        return tags.isEmpty()
+                ? findByCategory(category, pageDefinition)
+                : findByCategoryAndTags(category, tags, pageDefinition);
     }
 
 }
