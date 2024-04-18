@@ -1,7 +1,7 @@
 POST http://localhost:8080/articles
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic YWRtaW46YWRtaW4=
+Authorization: Basic amFuOjEyMw==
 
 {
   "title": "Podstawy Spring",
@@ -15,12 +15,14 @@ Authorization: Basic YWRtaW46YWRtaW4=
 DELETE http://localhost:8080/articles/f27ce0b6-5b33-4ed7-b38e-dc28a3da4c97
 Accept: application/json
 Content-Type: application/json
+Authorization: Basic amFuOjEyMw==
 
 ###
 
 PATCH http://localhost:8080/articles/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
+Authorization: Basic amFuOjEyMw==
 
 {
   "title": "Podstawy Spring",
@@ -34,13 +36,14 @@ Content-Type: application/json
 PUT http://localhost:8080/articles/published/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
+Authorization: Basic amFuOjEyMw==
 
 ###
 
 GET http://localhost:8080/articles/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
-#Authorization: Basic YWRtaW46MTIz
+Authorization: Basic amFuOjEyMw==
 #Authorization: API_KEY 1234567890
 
 ###
@@ -48,10 +51,5 @@ Content-Type: application/json
 GET http://localhost:8080/categories/IT/articles?tag=it&tag=java
 Accept: application/json
 Content-Type: application/js
+Authorization: Basic amFuOjEyMw==
 
-###
-
-GET http://localhost:8080/users/me
-Accept: application/json
-Content-Type: application/json
-Authorization: Basic YWRtaW46YWRtaW4=
