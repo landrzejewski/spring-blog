@@ -43,8 +43,8 @@ Authorization: Basic amFuOjEyMw==
 GET http://localhost:8080/articles/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic amFuOjEyMw==
-#Authorization: API_KEY 1234567890
+#Authorization: Basic amFuOjEyMw==
+Authorization: API_KEY 1234567890
 
 ###
 
