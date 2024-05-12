@@ -3,7 +3,6 @@ package pl.training.blog.application;
 import lombok.RequiredArgsConstructor;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
-import pl.training.blog.common.cache.FromCache;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
@@ -24,13 +23,11 @@ public class ArticleSearch implements ArticleSearchApi {
                 .orElseThrow(ArticleNotFoundException::new);
     }
 
-    @FromCache("byCategory")
     @Override
     public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
         return articleRepository.findByCategory(category, pageDefinition);
     }
 
-    @FromCache("byTags")
     @Override
     public ResultPage<ArticleView> findByTags(Set<Tag> tags, PageDefinition pageDefinition) {
         return articleRepository.findByTags(tags, pageDefinition);
