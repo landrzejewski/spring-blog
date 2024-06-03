@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static java.util.Arrays.stream;
@@ -20,26 +21,15 @@ import static java.util.stream.Collectors.joining;
 @Log
 public class CacheAspect {
 
-    private static final int DEFAULT_CACHE_CAPACITY = 10;
-
     private final Map<String, Cache<String, Object>> caches = new ConcurrentHashMap<>();
-    private final int capacity;
     @Setter
-    private Supplier<Cache<String, Object>> cacheSupplier = () -> new LinkedHashMapCache<>(DEFAULT_CACHE_CAPACITY);
-
-    public CacheAspect(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public CacheAspect() {
-        capacity = DEFAULT_CACHE_CAPACITY;
-    }
+    private Function<Integer, Cache<String, Object>> cacheSupplier = LinkedHashMapCache::new;
 
     @Around("@annotation(fromCache)")
     public Object read(ProceedingJoinPoint joinPoint, FromCache fromCache) throws Throwable {
         var cacheName = fromCache.value();
         var key = generateKey(cacheName, joinPoint);
-        caches.putIfAbsent(cacheName, cacheSupplier.get());
+        caches.putIfAbsent(cacheName, cacheSupplier.apply(fromCache.capacity()));
         var cache = caches.get(cacheName);
         var value = cache.get(key);
         if (value.isPresent()) {

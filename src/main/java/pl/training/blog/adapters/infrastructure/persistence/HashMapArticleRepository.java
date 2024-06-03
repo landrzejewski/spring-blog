@@ -21,7 +21,7 @@ public class HashMapArticleRepository implements ArticleRepository {
         this.articleMap = new HashMap<>();
     }
 
-    @FromCache("byId")
+    @FromCache(value = "byId", capacity = 1_000)
     @Override
     public Optional<Article> findById(UUID id) {
         return Optional.ofNullable(articleMap.get(id));

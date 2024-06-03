@@ -11,4 +11,6 @@ public @interface FromCache {
 
     String value();
 
+    int capacity() default 100;
+
 }
