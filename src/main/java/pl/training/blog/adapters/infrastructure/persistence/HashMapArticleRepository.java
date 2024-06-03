@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import pl.training.blog.application.ArticleView;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
+import pl.training.blog.common.cache.FromCache;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
@@ -20,11 +21,13 @@ public class HashMapArticleRepository implements ArticleRepository {
         this.articleMap = new HashMap<>();
     }
 
+    @FromCache("byId")
     @Override
     public Optional<Article> findById(UUID id) {
         return Optional.ofNullable(articleMap.get(id));
     }
 
+    //@FromCache("byCategory")
     @Override
     public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
         // Implement logic to find articles by category

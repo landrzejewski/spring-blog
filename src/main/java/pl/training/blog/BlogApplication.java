@@ -21,6 +21,7 @@ public class BlogApplication {
                 var article = new ArticleTemplate("Test", "Jan Kowalski", "",  IT);
                 var id = authorActions.create(article);
                 log.info(search.findByUid(id).toString());
+                log.info(search.findByUid(id).toString());
             }
      }
 
