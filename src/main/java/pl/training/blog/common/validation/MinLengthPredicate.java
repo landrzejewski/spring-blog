@@ -1,6 +1,5 @@
 package pl.training.blog.common.validation;
 
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 

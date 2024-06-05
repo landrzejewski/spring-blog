@@ -1,6 +1,7 @@
 package pl.training.blog.adapters.infrastructure.rest;
 
 import lombok.Data;
+import pl.training.blog.common.validation.Condition;
 
 @Data
 public class ArticleTemplateDto {
