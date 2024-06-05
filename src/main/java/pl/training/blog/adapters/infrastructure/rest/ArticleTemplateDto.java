@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class ArticleTemplateDto {
 
+    @Condition({"uniqueTitle", "minLength"})
     private String title;
     private String author;
     private String content;
