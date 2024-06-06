@@ -2,6 +2,7 @@ POST http://localhost:8080/articles
 Accept: application/json
 Content-Type: application/json
 Authorization: Basic amFuOjEyMw==
+#Authorization: API_KEY 1234567890
 
 {
   "title": "Podstawy Spring",
