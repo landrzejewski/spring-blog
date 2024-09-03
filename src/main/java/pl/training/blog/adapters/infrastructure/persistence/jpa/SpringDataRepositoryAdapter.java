@@ -1,7 +1,6 @@
 package pl.training.blog.adapters.infrastructure.persistence.jpa;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.training.blog.application.ArticleView;
@@ -16,7 +15,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-@Primary
 @Transactional
 @Repository
 @RequiredArgsConstructor
