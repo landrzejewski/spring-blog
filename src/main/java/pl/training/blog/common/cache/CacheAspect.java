@@ -2,23 +2,19 @@ package pl.training.blog.common.cache;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
-@Aspect
-@Component
 @Log
+@Aspect
 public class CacheAspect {
 
     private final Map<String, Cache<String, Object>> caches = new ConcurrentHashMap<>();
@@ -28,9 +24,10 @@ public class CacheAspect {
     @Around("@annotation(fromCache)")
     public Object read(ProceedingJoinPoint joinPoint, FromCache fromCache) throws Throwable {
         var cacheName = fromCache.value();
-        var key = generateKey(cacheName, joinPoint);
-        caches.putIfAbsent(cacheName, cacheSupplier.apply(fromCache.capacity()));
+        var capacity = fromCache.capacity();
+        caches.putIfAbsent(cacheName, cacheSupplier.apply(capacity));
         var cache = caches.get(cacheName);
+        var key = generateKey(joinPoint);
         var value = cache.get(key);
         if (value.isPresent()) {
             log.info("Cache hit");
@@ -41,8 +38,10 @@ public class CacheAspect {
         return result;
     }
 
-    private String generateKey(String cacheName, JoinPoint joinPoint) {
-        return cacheName + stream(joinPoint.getArgs()).map(Object::toString).collect(joining());
+    private String generateKey(ProceedingJoinPoint joinPoint) {
+        return stream(joinPoint.getArgs())
+                .map(Object::toString)
+                .collect(joining());
     }
 
 }
