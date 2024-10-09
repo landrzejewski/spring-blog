@@ -4,7 +4,7 @@ Content-Type: application/json
 Authorization: Basic amFuOjEyMw==
 
 {
-  "title": "Podstawy Spring",
+  "title": "Ps",
   "author": "Jan Kowalski",
   "category": "IT",
   "content": "..."
