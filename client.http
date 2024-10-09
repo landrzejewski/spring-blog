@@ -12,14 +12,14 @@ Authorization: Basic amFuOjEyMw==
 
 ###
 
-DELETE http://localhost:8000/articles/f27ce0b6-5b33-4ed7-b38e-dc28a3da4c97
+DELETE http://localhost:8000/articles/e5cb5836-156f-48b0-9398-a1bfa2c0dce0
 Accept: application/json
 Content-Type: application/json
 Authorization: Basic amFuOjEyMw==
 
 ###
 
-PATCH http://localhost:8000/articles/f20a7286-bb03-4128-a0db-379580c57a14
+PATCH http://localhost:8000/articles/d46d731a-f317-47a6-ac05-c6f4559d19ea
 Accept: application/json
 Content-Type: application/json
 Authorization: Basic amFuOjEyMw==
@@ -33,14 +33,14 @@ Authorization: Basic amFuOjEyMw==
 
 ###
 
-PUT http://localhost:8000/articles/published/f20a7286-bb03-4128-a0db-379580c57a14
+PUT http://localhost:8000/articles/published/d46d731a-f317-47a6-ac05-c6f4559d19ea
 Accept: application/json
 Content-Type: application/json
 Authorization: Basic amFuOjEyMw==
 
 ###
 
-GET http://localhost:8000/articles/f20a7286-bb03-4128-a0db-379580c57a14
+GET http://localhost:8000/articles/d46d731a-f317-47a6-ac05-c6f4559d19ea
 Accept: application/json
 Content-Type: application/json
 #Authorization: Basic amFuOjEyMw==

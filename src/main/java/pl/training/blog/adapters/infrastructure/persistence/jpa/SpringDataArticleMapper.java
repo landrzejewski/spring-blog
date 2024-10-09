@@ -37,6 +37,7 @@ public interface SpringDataArticleMapper {
 
     @Mapping(source = "content", target = "elements")
     @Mapping(source = "number", target = "pageNumber")
+    @Mapping(source = "totalPages", target = "numberOfPages")
     ResultPage<ArticleView> toDomain(Page<ArticleView> articleViewPage);
 
 }
