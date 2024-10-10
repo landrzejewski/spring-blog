@@ -1,7 +1,8 @@
 POST http://localhost:8000/articles
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic YWRtaW46YWRtaW4=
+#Authorization: Basic YWRtaW46YWRtaW4=
+Authorization: API_KEY 1234567890
 
 {
   "title": "Spring",
