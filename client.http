@@ -1,10 +1,10 @@
 POST http://localhost:8000/articles
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic amFuOjEyMw==
+Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "title": "Ps",
+  "title": "Spring",
   "author": "Jan Kowalski",
   "category": "IT",
   "content": "..."
