@@ -19,7 +19,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JpaArticleRepositoryAdapter implements ArticleRepository {
 
-    private final JpaArticleRepository articleRepository;
+    // private final JpaArticleRepository articleRepository;
+    private final SpringDataArticleRepository articleRepository;
     private final JpaArticleMapper articleMapper;
 
     @Override
@@ -58,7 +59,8 @@ public class JpaArticleRepositoryAdapter implements ArticleRepository {
     @Override
     public void update(Article article) {
         var articleEntity = articleMapper.toEntity(article);
-        articleRepository.update(articleEntity);
+        // articleRepository.update(articleEntity);
+        articleRepository.save(articleEntity);
     }
 
     @Override
