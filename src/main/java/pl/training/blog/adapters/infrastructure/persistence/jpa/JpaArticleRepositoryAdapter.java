@@ -1,60 +1,64 @@
-package pl.training.blog.adapters.infrastructure.persistence;
+package pl.training.blog.adapters.infrastructure.persistence.jpa;
 
-import org.springframework.stereotype.Repository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 import pl.training.blog.application.ArticleView;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
-import pl.training.blog.common.cache.FromCache;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleCategory;
 import pl.training.blog.domain.Tag;
 import pl.training.blog.ports.infrastructure.ArticleRepository;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
-@Repository
-public class HashMapArticleRepository implements ArticleRepository {
+@Component
+@RequiredArgsConstructor
+public class JpaArticleRepositoryAdapter implements ArticleRepository {
 
-    private final Map<UUID, Article> articleMap;
+    private final JpaArticleRepository articleRepository;
+    private final JpaArticleMapper articleMapper;
 
-    public HashMapArticleRepository() {
-        this.articleMap = new HashMap<>();
-    }
-
-    @FromCache(value = "byId", capacity = 1_000)
     @Override
     public Optional<Article> findById(UUID id) {
-        return Optional.ofNullable(articleMap.get(id));
+        return articleRepository.findById(id)
+                .map(articleMapper::toDomain);
     }
 
-    @FromCache(value = "byCategory", capacity = 1_000)
     @Override
     public ResultPage<ArticleView> findByCategory(ArticleCategory category, PageDefinition pageDefinition) {
-        // Implement logic to find articles by category
-        return new ResultPage<>();
+        return null;
     }
 
     @Override
     public ResultPage<ArticleView> findByTags(Set<Tag> tags, PageDefinition pageDefinition) {
-        // Implement logic to find articles by tags
         return null;
     }
 
     @Override
     public Article save(Article article) {
-        articleMap.put(article.getId(), article);
-        return article;
+        var articleEntity = articleMapper.toEntity(article);
+        var savedArticleEntity = articleRepository.save(articleEntity);
+        return articleMapper.toDomain(savedArticleEntity);
     }
 
     @Override
     public void deleteById(UUID articleId) {
-        articleMap.remove(articleId);
+
     }
 
     @Override
     public ResultPage<ArticleView> findByCategoryAndTags(ArticleCategory category, Set<Tag> tags, PageDefinition pageDefinition) {
-        // Implement logic to find articles by category and tags
         return null;
+    }
+
+    @Override
+    public void update(Article article) {
+        var articleEntity = articleMapper.toEntity(article);
+        articleRepository.update(articleEntity);
     }
 
     @Override

@@ -3,8 +3,10 @@ package pl.training.blog;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import pl.training.blog.application.ArticleReaderActions;
 import pl.training.blog.application.ArticleTemplate;
 import pl.training.blog.ports.api.ArticleAuthorActionsApi;
+import pl.training.blog.ports.api.ArticleReaderActionsApi;
 import pl.training.blog.ports.api.ArticleSearchApi;
 
 import static pl.training.blog.domain.ArticleCategory.IT;
@@ -17,11 +19,13 @@ public class BlogApplication {
         try (var container = new AnnotationConfigApplicationContext(BlogConfiguration.class)) {
             var authorActions = container.getBean(ArticleAuthorActionsApi.class);
             var search = container.getBean(ArticleSearchApi.class);
+            var readersActions = container.getBean(ArticleReaderActionsApi.class);
 
-            var article = new ArticleTemplate("Test", "Jan Kowalski", "", IT);
+            var article = new ArticleTemplate("Test", "Jan Kowalski", "",  IT);
             var id = authorActions.create(article);
+            readersActions.like(id);
             log.info(search.findByUid(id).toString());
-            log.info(search.findByUid(id).toString());
+            // log.info(search.findByUid(id).toString());
         }
     }
 

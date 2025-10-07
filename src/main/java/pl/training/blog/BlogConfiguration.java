@@ -1,45 +1,59 @@
 package pl.training.blog;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import pl.training.blog.application.ArticleAuthorActions;
-import pl.training.blog.application.ArticleReaderActions;
-import pl.training.blog.application.ArticleSearch;
-import pl.training.blog.common.cache.CacheAspect;
-import pl.training.blog.common.cache.LinkedHashMapCache;
-import pl.training.blog.ports.api.ArticleAuthorActionsApi;
-import pl.training.blog.ports.api.ArticleReaderActionsApi;
-import pl.training.blog.ports.api.ArticleSearchApi;
-import pl.training.blog.ports.infrastructure.ArticleRepository;
-import pl.training.blog.ports.infrastructure.EventsEmitter;
+import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.util.Properties;
+
+@PropertySource("classpath:jdbc.properties")
+@EnableTransactionManagement
 @EnableAspectJAutoProxy
 @ComponentScan
 @Configuration
 public class BlogConfiguration {
 
     @Bean
-    public ArticleAuthorActionsApi articleAuthorActions(ArticleRepository articleRepository) {
-        return new ArticleAuthorActions(articleRepository);
+    public DataSource dataSource(Environment environment) {
+        var datasource = new HikariDataSource();
+        datasource.setUsername(environment.getProperty("database.username"));
+        datasource.setPassword(environment.getProperty("database.password"));
+        datasource.setJdbcUrl(environment.getProperty("database.url"));
+        datasource.setDriverClassName(environment.getProperty("database.driver"));
+        datasource.setMaximumPoolSize(Integer.parseInt(environment.getProperty("database.pool-size")));
+        return datasource;
     }
 
     @Bean
-    public ArticleReaderActionsApi articleReaderActions(ArticleRepository articleRepository, EventsEmitter eventsEmitter) {
-        return new ArticleReaderActions(articleRepository, eventsEmitter);
+    public PropertiesFactoryBean jpaProperties() {
+        var factoryBean = new PropertiesFactoryBean();
+        factoryBean.setLocation(new ClassPathResource("jpa.properties"));
+        return factoryBean;
     }
 
     @Bean
-    public ArticleSearchApi articleSearch(ArticleRepository articleRepository) {
-        return new ArticleSearch(articleRepository);
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, @Qualifier("jpaProperties") Properties jpaProperties) {
+        var factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setDataSource(dataSource);
+        factoryBean.setPackagesToScan("pl.training.blog");
+        factoryBean.setJpaProperties(jpaProperties);
+        factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        return factoryBean;
     }
 
     @Bean
-    public CacheAspect cacheAspect() {
-        var cacheAspect = new CacheAspect();
-        cacheAspect.setCacheSupplier(LinkedHashMapCache::new);
-        return cacheAspect;
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
 }

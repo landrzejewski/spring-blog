@@ -1,6 +1,8 @@
 package pl.training.blog.application;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.Comment;
 import pl.training.blog.ports.api.ArticleReaderActionsApi;
@@ -9,6 +11,8 @@ import pl.training.blog.ports.infrastructure.EventsEmitter;
 
 import java.util.UUID;
 
+@Transactional
+@Service
 @RequiredArgsConstructor
 public class ArticleReaderActions implements ArticleReaderActionsApi {
 

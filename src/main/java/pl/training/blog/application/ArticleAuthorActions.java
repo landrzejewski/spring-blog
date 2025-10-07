@@ -1,6 +1,8 @@
 package pl.training.blog.application;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.training.blog.domain.Article;
 import pl.training.blog.domain.ArticleUpdate;
 import pl.training.blog.ports.api.ArticleAuthorActionsApi;
@@ -8,6 +10,8 @@ import pl.training.blog.ports.infrastructure.ArticleRepository;
 
 import java.util.UUID;
 
+@Transactional
+@Service
 @RequiredArgsConstructor
 public class ArticleAuthorActions implements ArticleAuthorActionsApi {
 

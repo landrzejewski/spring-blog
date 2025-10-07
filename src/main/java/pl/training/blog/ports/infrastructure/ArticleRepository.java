@@ -31,8 +31,10 @@ public interface ArticleRepository {
         var article = findById(articleId)
                 .orElseThrow(ArticleNotFoundException::new);
         operation.accept(article);
-        save(article);
+        update(article);
     }
+
+    void update(Article article);
 
     boolean existsByTitle(String title);
 

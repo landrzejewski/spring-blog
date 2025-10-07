@@ -1,6 +1,8 @@
 package pl.training.blog.application;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.training.blog.common.PageDefinition;
 import pl.training.blog.common.ResultPage;
 import pl.training.blog.domain.Article;
@@ -12,6 +14,8 @@ import pl.training.blog.ports.infrastructure.ArticleRepository;
 import java.util.Set;
 import java.util.UUID;
 
+@Transactional
+@Service
 @RequiredArgsConstructor
 public class ArticleSearch implements ArticleSearchApi {
 
