@@ -10,5 +10,5 @@ spring:
     mongodb:
       username: admin
       password: admin
-      database: articles
+      database: blog
       authentication-database: admin
