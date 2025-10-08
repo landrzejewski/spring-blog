@@ -16,7 +16,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-@Primary
 @Transactional
 @Repository
 @RequiredArgsConstructor
