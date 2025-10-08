@@ -1,5 +1,6 @@
-package pl.training.blog.adapters.infrastructure.persistence.rest;
+package pl.training.blog.adapters.rest;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ArticleAuthorsActionsRestController {
     private final ArticleAuthorActionsApi authorActions;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody ArticleTemplateDto articleTemplateDto) {
+    public ResponseEntity<Void> create(@Valid @RequestBody ArticleTemplateDto articleTemplateDto) {
         var articleTemplate = mapper.toDomain(articleTemplateDto);
         var articleId = authorActions.create(articleTemplate);
         var locationUri = LocationUri.fromRequestWith(articleId.toString());

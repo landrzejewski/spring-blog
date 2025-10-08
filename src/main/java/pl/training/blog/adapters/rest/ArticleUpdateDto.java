@@ -1,4 +1,4 @@
-package pl.training.blog.adapters.infrastructure.persistence.rest;
+package pl.training.blog.adapters.rest;
 
 import lombok.Data;
 
