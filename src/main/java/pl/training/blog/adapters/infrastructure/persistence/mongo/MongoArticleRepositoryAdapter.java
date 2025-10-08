@@ -64,4 +64,9 @@ public class MongoArticleRepositoryAdapter implements ArticleRepository {
         return new ResultPage<>();
     }
 
+    @Override
+    public boolean existsById(UUID id) {
+        return articleRepository.existsById(id);
+    }
+
 }

@@ -12,7 +12,7 @@ Authorization: Basic amFuOjEyMw==
 
 ###
 
-DELETE http://localhost:8080/articles/f598102e-9b67-4417-9e97-5a6942a6fd28
+DELETE http://localhost:8080/articles/1c3674b8-5874-4c73-8003-9b887bbcc218
 Accept: application/json
 Content-Type: application/json
 Authorization: Basic amFuOjEyMw==
@@ -40,7 +40,7 @@ Authorization: Basic amFuOjEyMw==
 
 ###
 
-GET http://localhost:8080/articles/1c3674b8-5874-4c73-8003-9b887bbcc218
+GET http://localhost:8080/articles/1c3674b8-5874-4c73-8003-9b887bbcc212
 Accept: application/json
 Content-Type: application/json
 #Authorization: Basic amFuOjEyMw==

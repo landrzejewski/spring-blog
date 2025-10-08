@@ -73,4 +73,9 @@ public class SpringDataRepositoryAdapter implements ArticleRepository {
         return articleRepository.existsByTitle(title);
     }
 
+    @Override
+    public boolean existsById(UUID id) {
+        return articleRepository.existsById(id);
+    }
+
 }

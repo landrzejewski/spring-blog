@@ -36,4 +36,6 @@ public interface ArticleRepository {
 
     boolean existsByTitle(String title);
 
+    boolean existsById(UUID id);
+
 }

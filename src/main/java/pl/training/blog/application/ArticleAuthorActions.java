@@ -28,6 +28,9 @@ public class ArticleAuthorActions implements ArticleAuthorActionsApi {
 
     @Override
     public void delete(UUID articleId) {
+        if (!articleRepository.existsById(articleId)) {
+            throw new ArticleNotFoundException();
+        }
         articleRepository.deleteById(articleId);
     }
 
