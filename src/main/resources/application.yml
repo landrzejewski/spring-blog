@@ -14,3 +14,8 @@ spring:
       password: admin
       database: articles
       authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8100/realms/training

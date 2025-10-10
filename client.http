@@ -1,8 +1,7 @@
 POST http://localhost:8080/articles
 Accept: application/json
 Content-Type: application/json
-#Authorization: Basic amFuOjEyMw==
-Authorization: API_KEY 1234567890
+Authorization: bearer {{token}}
 
 {
   "title": "Podstawy Spring",
@@ -16,14 +15,14 @@ Authorization: API_KEY 1234567890
 DELETE http://localhost:8080/articles/f27ce0b6-5b33-4ed7-b38e-dc28a3da4c97
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic amFuOjEyMw==
+Authorization: bearer {{token}}
 
 ###
 
 PATCH http://localhost:8080/articles/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic amFuOjEyMw==
+Authorization: bearer {{token}}
 
 {
   "title": "Podstawy Spring",
@@ -37,20 +36,32 @@ Authorization: Basic amFuOjEyMw==
 PUT http://localhost:8080/articles/published/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
-Authorization: Basic amFuOjEyMw==
+Authorization: bearer {{token}}
 
 ###
 
 GET http://localhost:8080/articles/f20a7286-bb03-4128-a0db-379580c57a14
 Accept: application/json
 Content-Type: application/json
-#Authorization: Basic amFuOjEyMw==
-Authorization: API_KEY 1234567890
+Authorization: bearer {{token}}
 
 ###
 
 GET http://localhost:8080/categories/IT/articles?tag=it&tag=java
 Accept: application/json
 Content-Type: application/js
-Authorization: Basic amFuOjEyMw==
+Authorization: bearer {{token}}
 
+###
+
+//@no-redirect
+//@no-cookie-jar
+POST http://localhost:8100/realms/training/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=training-client&grant_type=password&username=reader&password=admin
+
+> {%
+    client.global.set('token', response.body.access_token);
+    client.global.set('refreshToken', response.body.refresh_token);
+%}

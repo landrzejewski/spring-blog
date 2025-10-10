@@ -4,14 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.training.blog.security.ApiKeyAuthenticationFilter;
+import pl.training.blog.security.InMemoryGrantedAuthoritiesConverter;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -20,9 +15,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, ApiKeyAuthenticationFilter apiKeyAuthenticationFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .addFilterBefore(apiKeyAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(withDefaults())
                 .authorizeHttpRequests(config -> config
@@ -30,21 +24,17 @@ public class SecurityConfiguration {
                         .requestMatchers(GET, "/categories/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().hasRole("ADMIN")
                 )
+                .oauth2ResourceServer(config -> config
+                        .jwt(withDefaults())
+                )
                 .build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserDetailsManager userDetailsManager() {
-        var admin = User.withUsername("jan")
-                .password(passwordEncoder().encode("123"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(admin);
+    public JwtAuthenticationConverter  jwtAuthenticationConverter() {
+        var converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(new InMemoryGrantedAuthoritiesConverter());
+        return converter;
     }
 
 }
